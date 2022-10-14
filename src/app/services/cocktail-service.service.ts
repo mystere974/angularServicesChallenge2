@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 import { Cocktail } from '../classes/cocktail';
 
@@ -5,8 +7,15 @@ import { Cocktail } from '../classes/cocktail';
   providedIn: 'root'
 })
 export class CocktailServiceService {
+  
+  constructor(public http: HttpClient) { }
 
-  public cocktails: Cocktail[]= [
+  getCocktails(): Observable<Cocktail[]>{
+    return this.http.get<Cocktail[]>("../assets/data.json")
+  }
+
+  
+  /* public cocktails: Cocktail[]= [
     {
       name:'copaCabana',
       price: 5,
@@ -21,14 +30,10 @@ export class CocktailServiceService {
   public toto: Cocktail[] = [
     new Cocktail('toto', 500, ''),
     new Cocktail('argh', 150, '')
-  ]
-  constructor() { }
+  ] */
 
-  getCocktails(): Cocktail[]{
-    return this.cocktails
-  }
 
-  getCocktail(): Cocktail {
+  /* getCocktail(): Cocktail {
     return this.toto[1];
-  }
+  } */
 }
